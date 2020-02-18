@@ -14,3 +14,5 @@ All of these projects are available with the intention that other people will en
 ## Circle Variations
 
 <p align="center"><img src="https://github.com/erdavids/Many-Circles/blob/master/Circles/circle_one.png"></p>
+<p align="center"><img src="https://github.com/erdavids/Many-Circles/blob/master/Circles/circle_two.png"></p>
+<p align="center"><img src="https://github.com/erdavids/Many-Circles/blob/master/Circles/circle_three.png"></p>
