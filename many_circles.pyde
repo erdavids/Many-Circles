@@ -1,6 +1,6 @@
 w, h = 1000, 1000
 
-def circle1(x, y, r):
+def circle_one(x, y, r):
     
     max_section_length = r/30
     section_spacing = 5
@@ -31,6 +31,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle1(w/2, h/2, 750)
+    circle_one(w/2, h/2, 750)
+    
+    save("Circles/circle_one.png")
     
     
