@@ -130,6 +130,19 @@ def circle_six(x, y, r, d):
     
     popMatrix()
     circle_six(x, y, r, d + 1)
+    
+def circle_seven(x, y, r):
+    translate(x, y)
+    noFill()
+
+    arc_count = 200
+        
+    for i in range(arc_count):
+        strokeWeight(random(2, 3))
+        rotate(random(2*PI))
+        a = random(r)
+        arc(0, 0, a, a, 0, PI)
+    
 
 # Domain Warping Circle (Cool effect but not super practical for multiple circles)
 # Might move this lower down (Doesn't fully fit the style of the other circles)
@@ -185,7 +198,7 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_seven(w/2, h/2, 750, 1)
+    circle_seven(w/2, h/2, 750)
     
     save("Circles/circle_seven.png")
     
