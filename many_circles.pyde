@@ -60,6 +60,7 @@ def circle_three(x, y, r):
     popMatrix()
     
 # Domain Warping Circle (Cool effect but not super practical for multiple circles)
+# Might move this lower down (Doesn't fully fit the style of the other circles)
 def circle_four(x, y, r):
     translate(x, y)
     noFill()
@@ -76,6 +77,28 @@ def circle_four(x, y, r):
                 warp(j * noise_scale, i * noise_scale)
                 
                 point(j, i)
+                
+# Pure Random Walk (added parameter for depth in case of recursion)
+def circle_five(x, y, r, d):
+    pushMatrix()
+    translate(x, y)
+    noFill()
+    stroke(0, 10)
+    
+    steps = [-1, 1]
+    rotate(random(2*PI))
+    current_point = [0, r/2.2]
+    if (d < 50):
+        while(distance(current_point, (0, 0)) < r/2):
+            point(current_point[0], current_point[1])
+        
+            current_point[0] += random(-1, 1)
+            current_point[1] += random(-1, 1)
+    else:
+        return
+    
+    popMatrix()
+    circle_five(x, y, r, d + 1)
             
             
 ##################
@@ -99,7 +122,7 @@ def warp(x, y):
     c = fbm(x + 4.0 * r[0], y + 4.0 * r[1])
     col = 255.0 * c
     
-    stroke(col)
+    stroke(col, 255)
     
 # Used by: Circle 4:
 def distance(p1, p2):
@@ -111,8 +134,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_four(w/2, h/2, 750)
+    circle_five(w/2, h/2, 750, 1)
     
-    save("Circles/circle_four.png")
+    save("Circles/circle_five.png")
     
     
