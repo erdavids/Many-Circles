@@ -142,6 +142,20 @@ def circle_seven(x, y, r):
         rotate(random(2*PI))
         a = random(r)
         arc(0, 0, a, a, 0, PI)
+        
+def circle_eight(x, y, r):
+    translate(x, y)
+    fill(255)
+
+    rotate(random(2*PI))
+    
+    count = 60
+    
+    for i in range(count):
+        strokeWeight(random(3, 7))
+        circle(0, i * (r/count) * .5, r - (i * r/count))
+        
+            
     
 
 # Domain Warping Circle (Cool effect but not super practical for multiple circles)
@@ -198,8 +212,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_seven(w/2, h/2, 750)
+    circle_eight(w/2, h/2, 750)
     
-    save("Circles/circle_seven.png")
+    save("Circles/circle_eight.png")
     
     
