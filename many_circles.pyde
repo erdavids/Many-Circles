@@ -143,53 +143,95 @@ def circle_seven(x, y, r):
         a = random(r)
         arc(0, 0, a, a, 0, PI)
         
-        
-            
-    
 
-# Domain Warping Circle (Cool effect but not super practical for multiple circles)
-# Might move this lower down (Doesn't fully fit the style of the other circles)
-def circle_something(x, y, r):
+def circle_eight(x, y, r):
     translate(x, y)
     noFill()
-    stroke(0)
+    strokeWeight(4)
     
-    noise_scale = .02
-    
-    strokeWeight(2)    
-    circle(0, 0, r)
-    
-    for i in range(-r/2, r/2):
-        for j in range(-r/2, r/2):
-            if (distance((j, i), (0, 0)) < r/2):
-                warp(j * noise_scale, i * noise_scale)
-                
-                point(j, i)
-                
+    for i in range(7):
+        points = []
+        for i in range(0, 360, 15):
+            points.append((r/2*sin(radians(i)), r/2*cos(radians(i))))
+        
+        final = []
+        for p in points:
+            x_change = p[0] / 55.0
+            y_change = p[1] / 55.0
             
+            change = random(-3, 3)
+            p = (p[0] + x_change * change, p[1] + y_change * change)
+            final.append(p)
+    
+        beginShape()
+        for p in final:
+            curveVertex(*p)
+        curveVertex(*final[0])
+        curveVertex(*final[1])
+        curveVertex(*final[2])
+        endShape()
             
+def circle_nine(x, y, r):
+    translate(x, y)
+    noFill()
+    strokeWeight(4)
+    
+    points = []
+    for i in range(0, 360, 15):
+        points.append((r/2*sin(radians(i)), r/2*cos(radians(i))))
+    
+    # Create the base
+    final = []
+    for p in points:
+        x_change = p[0] / 55.0
+        y_change = p[1] / 55.0
+        
+        change = random(-2, 2)
+        p = (p[0] + x_change * change, p[1] + y_change * change)
+        final.append(p)
+
+
+    for i in range(6):
+        variation = []
+        for p in final:
+            x_change = p[0] / 55.0
+            y_change = p[1] / 55.0
+            
+            change = random(-3, 3)
+            p = (p[0] + x_change * change, p[1] + y_change * change)
+            variation.append(p)
+        
+        beginShape()
+        el = -1
+        for p in variation:
+            curveVertex(*p)
+            # if (el > 0 and el < len(variation) - 1):
+            #     strokeWeight(1)
+            #     draw_random_points_between((variation[el][0], variation[el][1]), (p[0], p[1]), 45, 1)
+            # el += 1
+        curveVertex(*variation[0])
+        curveVertex(*variation[1])
+        curveVertex(*variation[2])
+        strokeWeight(4)
+        endShape()
+    
+
+
 ##################
 #
 # Helper functions
 #
 ##################
 
-# Used by: Circle 4, 
-def fbm(x, y):
-    return noise(x, y)
+def draw_random_points_between(p1, p2, n, d):
+    for i in range(n):
+        u = random(1)
+        
+        x_dev = random(-d, d)
+        y_dev = random(-d, d)
+        
+        point((1 - u)*p1[0] + u * p2[0] + x_dev, (1 - u)*p1[1] + u * p2[1] + y_dev)
 
-# Used by: Circle 4,
-# f(p) = fbm(p + fbm(p + fbm(p)))
-def warp(x, y):
-    
-    q = (fbm(x + 1, y + 1), fbm(x + 2, y + 2))
-    r = (fbm(x + 4.0 * q[0], y + 4.0 * q[1]), fbm(x + 4.0 * q[0] + 1, y + 4.0 * q[1] + 1))
-    
-    
-    c = fbm(x + 4.0 * r[0], y + 4.0 * r[1])
-    col = 255.0 * c
-    
-    stroke(col, 255)
     
 # Used by: Many:
 def distance(p1, p2):
@@ -201,8 +243,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_eight(w/2, h/2, 750)
+    circle_nine(w/2, h/2, 750)
     
-    save("Circles/circle_eight.png")
+    save("Circles/circle_nine.png")
     
     
