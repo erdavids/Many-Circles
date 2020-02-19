@@ -59,9 +59,33 @@ def circle_three(x, y, r):
         
     popMatrix()
     
+# Pure Random Walk (added parameter for depth in case of recursion)
+def circle_four(x, y, r, d):
+    pushMatrix()
+    translate(x, y)
+    noFill()
+    stroke(0, 20)
+    
+    steps = [-1, 1]
+    rotate(random(2*PI))
+    current_point = [0, r/2.2]
+    if (d < 50):
+        while(distance(current_point, (0, 0)) < r/2):
+            point(current_point[0], current_point[1])
+        
+            current_point[0] += random(-1, 1)
+            current_point[1] += random(-1, 1)
+    else:
+        return
+    
+    popMatrix()
+    circle_four(x, y, r, d + 1)
+    
+    
+
 # Domain Warping Circle (Cool effect but not super practical for multiple circles)
 # Might move this lower down (Doesn't fully fit the style of the other circles)
-def circle_four(x, y, r):
+def circle_something(x, y, r):
     translate(x, y)
     noFill()
     stroke(0)
@@ -78,27 +102,6 @@ def circle_four(x, y, r):
                 
                 point(j, i)
                 
-# Pure Random Walk (added parameter for depth in case of recursion)
-def circle_five(x, y, r, d):
-    pushMatrix()
-    translate(x, y)
-    noFill()
-    stroke(0, 10)
-    
-    steps = [-1, 1]
-    rotate(random(2*PI))
-    current_point = [0, r/2.2]
-    if (d < 50):
-        while(distance(current_point, (0, 0)) < r/2):
-            point(current_point[0], current_point[1])
-        
-            current_point[0] += random(-1, 1)
-            current_point[1] += random(-1, 1)
-    else:
-        return
-    
-    popMatrix()
-    circle_five(x, y, r, d + 1)
             
             
 ##################
@@ -124,7 +127,7 @@ def warp(x, y):
     
     stroke(col, 255)
     
-# Used by: Circle 4:
+# Used by: Many:
 def distance(p1, p2):
     return sqrt(pow(p2[0] - p1[0], 2) + pow(p2[1] - p1[1], 2))
 
@@ -134,8 +137,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_five(w/2, h/2, 750, 1)
+    circle_four(w/2, h/2, 750, 1)
     
-    save("Circles/circle_five.png")
+    save("Circles/circle_four.png")
     
     
