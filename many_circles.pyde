@@ -82,6 +82,54 @@ def circle_four(x, y, r, d):
     circle_four(x, y, r, d + 1)
     
     
+# Directed random walk
+def circle_five(x, y, r, d):
+    pushMatrix()
+    translate(x, y)
+    noFill()
+    stroke(0, 255)
+    
+    steps = [-4, 4, 0, 0]
+    rotate(random(2*PI))
+    current_point = [0, 0]
+    if (d < 100):
+        while(distance(current_point, (0, 0)) < r/2):
+            point(current_point[0], current_point[1])
+        
+            current_point[0] += steps[int(random(len(steps)))]
+            if (current_point[0] != 0):
+                current_point[1] += steps[int(random(len(steps) - 2))]
+    else:
+        return
+    
+    popMatrix()
+    circle_five(x, y, r, d + 1)
+    
+# Directed random walk with lines
+def circle_six(x, y, r, d):
+    pushMatrix()
+    translate(x, y)
+    noFill()
+    stroke(0, 255)
+    
+    steps = [-7, 7, 0, 0]
+    rotate(random(2*PI))
+    current_point = [0, 0]
+    last_point = current_point[:]
+    if (d < 100):
+        while(distance(current_point, (0, 0)) < r/2):
+            current_point[0] += steps[int(random(len(steps)))]
+            if (current_point[0] != 0):
+                current_point[1] += steps[int(random(len(steps) - 2))]
+                
+            line(current_point[0], current_point[1], last_point[0], last_point[1])
+            
+            last_point = current_point[:]
+    else:
+        return
+    
+    popMatrix()
+    circle_six(x, y, r, d + 1)
 
 # Domain Warping Circle (Cool effect but not super practical for multiple circles)
 # Might move this lower down (Doesn't fully fit the style of the other circles)
@@ -137,8 +185,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_four(w/2, h/2, 750, 1)
+    circle_seven(w/2, h/2, 750, 1)
     
-    save("Circles/circle_four.png")
+    save("Circles/circle_seven.png")
     
     
