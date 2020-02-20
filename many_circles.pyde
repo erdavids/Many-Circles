@@ -143,35 +143,8 @@ def circle_seven(x, y, r):
         a = random(r)
         arc(0, 0, a, a, 0, PI)
         
-
+# Create a base deformed circle and then iterate off of it    
 def circle_eight(x, y, r):
-    translate(x, y)
-    noFill()
-    strokeWeight(4)
-    
-    for i in range(7):
-        points = []
-        for i in range(0, 360, 15):
-            points.append((r/2*sin(radians(i)), r/2*cos(radians(i))))
-        
-        final = []
-        for p in points:
-            x_change = p[0] / 55.0
-            y_change = p[1] / 55.0
-            
-            change = random(-3, 3)
-            p = (p[0] + x_change * change, p[1] + y_change * change)
-            final.append(p)
-    
-        beginShape()
-        for p in final:
-            curveVertex(*p)
-        curveVertex(*final[0])
-        curveVertex(*final[1])
-        curveVertex(*final[2])
-        endShape()
-            
-def circle_nine(x, y, r):
     translate(x, y)
     noFill()
     strokeWeight(4)
@@ -186,34 +159,74 @@ def circle_nine(x, y, r):
         x_change = p[0] / 55.0
         y_change = p[1] / 55.0
         
-        change = random(-2, 2)
+        change = random(-3, 3)
         p = (p[0] + x_change * change, p[1] + y_change * change)
         final.append(p)
 
 
-    for i in range(6):
+    for i in range(8):
         variation = []
         for p in final:
             x_change = p[0] / 55.0
             y_change = p[1] / 55.0
             
-            change = random(-3, 3)
+            change = random(-2, 2)
             p = (p[0] + x_change * change, p[1] + y_change * change)
             variation.append(p)
         
         beginShape()
-        el = -1
         for p in variation:
             curveVertex(*p)
-            # if (el > 0 and el < len(variation) - 1):
-            #     strokeWeight(1)
-            #     draw_random_points_between((variation[el][0], variation[el][1]), (p[0], p[1]), 45, 1)
-            # el += 1
         curveVertex(*variation[0])
         curveVertex(*variation[1])
         curveVertex(*variation[2])
-        strokeWeight(4)
         endShape()
+        
+def draw_line(p, v, l, d, md, r):
+    if (d > md):
+        return
+    
+    
+    
+    start_point = p[:]
+    end_point = (p[0] + v[0] * l, p[1] + v[1] * l)
+    
+    if (distance(end_point, (0, 0)) > r/2):
+        draw_line(start_point, v, l*.3, d, md, r)
+
+    
+        
+    if (distance(end_point, (0, 0)) > r/2):
+        return
+    
+    #line(start_point[0], start_point[1], end_point[0], end_point[1])
+    strokeWeight(2)
+    lr = -40
+    hr = 40
+    curve(start_point[0] + random(lr, hr), start_point[1] + random(lr, hr), start_point[0], start_point[1], end_point[0], end_point[1], end_point[0] + random(lr, hr), end_point[1] + random(lr, hr))
+    
+    if (random(1) < 1):
+        v_one = v.copy()
+        v_one.rotate(random(0, .16) * PI)
+        draw_line(end_point, v_one, l, d + 1, md, r)
+    
+    if (random(1) < 1):
+        v_two = v.copy()
+        v_two.rotate(random(1.84, 2) * PI)
+        draw_line(end_point, v_two, l, d + 1, md,r )
+    
+def circle_nine(x, y, r):
+    translate(x, y)
+
+    noFill()
+    strokeWeight(4)
+    
+
+    
+    for i in range(8):
+        rotate(radians(i * 45))
+        draw_line((0, 0), PVector(2, 2), 12, 1, 12, r)
+    
     
 
 
