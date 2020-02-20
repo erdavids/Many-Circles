@@ -182,6 +182,7 @@ def circle_eight(x, y, r):
         curveVertex(*variation[2])
         endShape()
         
+        
 def draw_line(p, v, l, d, md, r):
     if (d > md):
         return
@@ -227,7 +228,103 @@ def circle_nine(x, y, r):
         rotate(radians(i * 45))
         draw_line((0, 0), PVector(2, 2), 12, 1, 12, r)
     
+
+def circle_ten(x, y, r):
     
+    translate(x, y)
+    noFill()
+    
+    strokeCap(ROUND)
+    strokeWeight(4)
+        
+    count = 60
+    for j in range(count):
+        points = []
+        for i in range(0, 360, 1):
+            points.append(((r/2 - j*r/2/count)*sin(radians(i)), (r/2 - j*r/2/count)*cos(radians(i))))
+            
+        beginShape()
+        for p in points:
+            curveVertex(*p)
+            if (random(1) < .1):
+                endShape()
+                beginShape()
+        curveVertex(*points[0])
+        curveVertex(*points[1])
+        curveVertex(*points[2])
+        endShape()
+
+def circle_eleven(x, y, r):
+    translate(x, y)
+    noFill()
+    
+    strokeCap(ROUND)
+    strokeWeight(4)
+        
+    count = 60
+    for j in range(count):
+        points = []
+        for i in range(0, 360, 1):
+            points.append(((r/2 - j*r/2/count)*sin(radians(i)), r/2*cos(radians(i))))
+            
+        beginShape()
+        for p in points:
+            curveVertex(*p)
+            if (random(1) < .1):
+                endShape()
+                beginShape()
+        curveVertex(*points[0])
+        curveVertex(*points[1])
+        curveVertex(*points[2])
+        endShape()
+        
+    stroke(255)
+    strokeWeight(20)
+    circle(0, 0, r+20)
+    
+def circle_twelve(x, y, r):
+    translate(x, y)
+    noFill()
+    
+    strokeCap(ROUND)
+    strokeWeight(4)
+        
+    count = 60
+    for j in range(count):
+        points = []
+        for i in range(0, 360, 1):
+            points.append(((r/2 - j*r/2/count)*sin(radians(i)), r/2*cos(radians(i))))
+            
+        beginShape()
+        for p in points:
+            curveVertex(*p)
+            if (random(1) < .1):
+                endShape()
+                beginShape()
+        curveVertex(*points[0])
+        curveVertex(*points[1])
+        curveVertex(*points[2])
+        endShape()
+        
+    for j in range(count):
+        points = []
+        for i in range(0, 360, 1):
+            points.append((r/2*sin(radians(i)), (r/2 - j*r/2/count)*cos(radians(i))))
+            
+        beginShape()
+        for p in points:
+            curveVertex(*p)
+            if (random(1) < .1):
+                endShape()
+                beginShape()
+        curveVertex(*points[0])
+        curveVertex(*points[1])
+        curveVertex(*points[2])
+        endShape()
+        
+    stroke(255)
+    strokeWeight(20)
+    circle(0, 0, r+20)
 
 
 ##################
@@ -256,8 +353,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_nine(w/2, h/2, 750)
+    circle_eleven(w/2, h/2, 750)
     
-    save("Circles/circle_nine.png")
+    save("Circles/circle_twelve.png")
     
     
