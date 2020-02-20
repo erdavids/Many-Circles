@@ -325,7 +325,42 @@ def circle_twelve(x, y, r):
     stroke(255)
     strokeWeight(20)
     circle(0, 0, r+20)
+    
 
+# Simple Circle Packing with 250000 circles
+# Takes a long time with the brute force method, not really worth optimizing for this project though
+def circle_thirteen(x, y, r):
+    translate(x, y)
+    strokeWeight(2)
+    points = []
+    for j in range(25000):
+        new_p = ((random(-r/2, r/2), random(-r/2, r/2)))
+        
+        valid = True
+        if distance(new_p, (0, 0)) < r/2:
+            for p in points:
+                if (distance(new_p, p) < 3):
+                    valid = False
+            if valid:
+                point(*new_p)
+                points.append(new_p)
+
+# Circle packing with a relaxed distance requirement further from center
+def circle_fourteen(x, y, r):
+    translate(x, y)
+    strokeWeight(2)
+    points = []
+    for j in range(15000):
+        new_p = ((random(-r/2, r/2), random(-r/2, r/2)))
+        
+        valid = True
+        if distance(new_p, (0, 0)) < r/2:
+            for p in points:
+                if (distance(new_p, p) < 20 - distance(p, (0,0))/float(r/2) * 20):
+                    valid = False
+            if valid:
+                point(*new_p)
+                points.append(new_p)
 
 ##################
 #
@@ -353,8 +388,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_eleven(w/2, h/2, 750)
+    circle_fourteen(w/2, h/2, 750)
     
-    save("Circles/circle_twelve.png")
+    save("Circles/circle_fourteen.png")
     
     
