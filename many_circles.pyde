@@ -364,6 +364,61 @@ def circle_fourteen(x, y, r):
                 point(*new_p)
                 points.append(new_p)
                 
+                
+def circle_fifteen(x, y, r):
+    translate(x, y)
+    noFill()
+    
+    strokeCap(ROUND)
+    strokeWeight(1)
+        
+    count = 50
+    for j in range(count):
+        points = []
+        for i in range(0, 360, 2):
+            points.append(((r/2 - j*r/2/count)*sin(radians(i)), (r/2 - j*r/2/count)*cos(radians(i))))
+            
+        beginShape()
+        for p in points:
+            if (random(1) < .6):
+                circle(p[0], p[1], 3)
+                
+def circle_sixteen(x, y, r):
+    translate(x, y)
+    noFill()
+    
+    strokeCap(ROUND)
+    strokeWeight(1)
+        
+    count = 20
+    for j in range(count):
+        points = []
+        for i in range(0, 360, 1):
+            points.append(((r/2 - j*r/2/count)*sin(radians(i)), (r/2 - j*r/2/count)*cos(radians(i))))
+            
+        beginShape()
+        for p in points:
+            if (random(1) < .6):
+                line(p[0], p[1], p[0] + random(-3, 3), p[1] + random(-3, 3))
+                
+                
+def circle_seventeen(x, y, r):
+    translate(x, y)
+    noFill()
+    
+    strokeCap(ROUND)
+    strokeWeight(1)
+        
+    count = 20
+    for j in range(count):
+        points = []
+        for i in range(0, 360, 1):
+            points.append(((r/2 - j*r/2/count)*sin(radians(i)), (r/2 - j*r/2/count)*cos(radians(i))))
+            
+        beginShape()
+        for p in points:
+            if (random(1) < .6):
+                line(p[0], p[1], p[0] + random(-3, 3), p[1] + random(-3, 3))
 
 ##################
 #
@@ -391,8 +446,8 @@ def setup():
     background(255)
     pixelDensity(2)
     
-    circle_fifteen(w/2, h/2, 750)
+    circle_seventeen(w/2, h/2, 750)
     
-    save("Circles/circle_fifteen.png")
+    save("Circles/circle_seventeen.png")
     
     
